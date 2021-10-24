@@ -83,6 +83,21 @@ func main() {
     }
     fmt.Printf("Number of incomplete deployments: %d\n", nonReadyDeploys)
 
+
+    // daemonsets
+    daemonsets, err := clientset.AppsV1().DaemonSets("").List(ctx, metav1.ListOptions{})
+    if err != nil {
+        panic(err.Error())
+    }
+    fmt.Printf("Number of daemonsets registered: %d\n", len(daemonsets.Items))
+    nonReadyDaemonsets := 0
+    for index, daemonset := range daemonsets.Items {
+        if(daemonset.Status.NumberUnavailable > 0) {
+            nonReadyDaemonsets++
+        }
+    }
+    fmt.Printf("Number of incomplete daemonsets: %d\n", nonReadyDaemonsets)
+
     nodes, err := clientset.CoreV1().Nodes().List(ctx, metav1.ListOptions{})
     if err != nil {
         panic(err.Error())
