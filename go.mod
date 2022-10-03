@@ -1,6 +1,6 @@
 module github.com/ThomasWo/knotready
 
-go 1.17
+go 1.19
 
 require (
 	k8s.io/api v0.25.2
