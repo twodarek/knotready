@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strconv"
 	"strings"
 
 	v1 "k8s.io/api/core/v1"
@@ -62,7 +61,7 @@ func main() {
 	for index, pod := range pods.Items {
 		if pod.Status.Phase != v1.PodRunning {
 			fmt.Printf("tmp")
-			fmt.Printf(strconv.Itoa(index))
+			fmt.Printf("Index: %d", index)
 			nonReadyPods++
 		}
 	}
@@ -107,7 +106,7 @@ func main() {
 		if !isNodeReady(node) {
 			fmt.Printf("tmp")
 			fmt.Printf("Not Ready Node: %s", node.GetName())
-			fmt.Printf(strconv.Itoa(index))
+			fmt.Printf("Index: %d", index)
 			nonReadyNodes++
 		}
 	}
